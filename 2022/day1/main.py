@@ -43,17 +43,6 @@ class Elf:
         return sum(self.carrying)
 
 
-# elf1 = Elf("Elf1", [1000, 2000, 3000])
-# elf2 = Elf("Elf2", [4000])
-# elf3 = Elf("Elf3", [5000, 6000])
-# elf4 = Elf("Elf4", [7000, 8000, 9000])
-# elf5 = Elf("Elf5", [10000])
-#
-# allElves = [elf1, elf2, elf3, elf4, elf5]
-#
-# for elf in allElves:
-#     print(f"{elf.name} is carrying {elf.howMuchCarrying()}")
-
 with open('./input.txt') as f:
     lines = f.readlines()
     lines = [x.replace('\n', '') for x in lines]
