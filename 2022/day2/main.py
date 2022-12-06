@@ -44,12 +44,29 @@ class RockPaperScizzor:
             return move.score
         return move.score + self.win
 
+    def runGameTwo(self, opponent, what_needs_to_happen):
+        play_dict = {"C": Scissor, "B": Paper, "A": Rock}
+        win_dict = {Scissor: Rock, Paper: Scissor, Rock: Paper}
+        lose_dict = {Scissor: Paper, Paper: Rock, Rock: Scissor}
+        what_needs_to_happen_dict = {"Z": "Win", "Y": "Draw", "X": "Lost"}
+        opponent_move = play_dict[opponent]
+        player_move = what_needs_to_happen_dict[what_needs_to_happen]
+
+        if player_move == "Win":
+            return win_dict[opponent_move].score + self.win
+        if player_move == "Lost":
+            return lose_dict[opponent_move].score
+        return opponent_move.score + self.draw
+
 
 with open('./input.txt') as f:
     matchSheet = f.readlines()
     matchRounds = [x.replace('\n', '').split(" ") for x in matchSheet]
     totalScore = 0
+    totalScoreRoundTwo = 0
     for round in matchRounds:
         totalScore += RockPaperScizzor().runGame(round[0], round[1])
+        totalScoreRoundTwo += RockPaperScizzor().runGameTwo(round[0], round[1])
 
-    print(f"Totalscore: {totalScore}")
+    print(f"Totalscore: {totalScore} (Part 1)")
+    print(f"Totalscore: {totalScoreRoundTwo} (Part 2)")
