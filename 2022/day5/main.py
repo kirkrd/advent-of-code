@@ -24,6 +24,17 @@ def move_items(lists, num_items, src_index, dest_index):
         lists[dest_index].insert(0, item)
 
 
+def move_items_v2(lists, num_items, src_index, dest_index):
+    # Remove the specified number of items from the source list
+    src_items = lists[src_index][:num_items]
+    for item in src_items:
+        lists[src_index].remove(item)
+    # Insert the items at the start of the destination list
+    src_items.reverse()
+    for item in src_items:
+        lists[dest_index].insert(0, item)
+
+
 def makeLineToInstruction(line: str):
     line = line.replace('\n', '')
     # Replace all occurrences of the specified strings
@@ -37,13 +48,17 @@ def makeLineToInstruction(line: str):
 inputs = open("./input.txt").readlines()
 
 craneInstructions = [makeLineToInstruction(x) for x in inputs]
+# Use move_items or move_items_v2 to get answer to day 1 respective day 2
+
 for instruction in craneInstructions:
-    move_items(lists, instruction[0], instruction[1] - 1, instruction[2] - 1)
+    move_items_v2(lists, instruction[0],
+                  instruction[1] - 1, instruction[2] - 1)
 order = []
 
 for i, stack in enumerate(lists):
-    print(f"{i + 1}: {stack[0]}")
+    # print(f"{i + 1}: {stack[0]}")
     order.append(stack[0])
 
+
 answer = "".join(order)
-print(f"The answer for Day 5 Part 1 is: {answer}")
+print(f"The answer for Day 5 is: {answer}")
