@@ -6,6 +6,7 @@ with open('./input.txt') as f:
     left_list = []
     right_list = []
     total_distance = 0
+    simularity_score = 0
     for line in lines:
         splitline = line.split("   ")
         if splitline[0] != "":
@@ -17,8 +18,10 @@ with open('./input.txt') as f:
     right_list.sort()
     for i, x in enumerate(left_list):
         y = right_list[i]
+        number_of_hits_in_right_list = right_list.count(x) * x
         distance = abs(x - y)
-        print(x, y)
         total_distance = total_distance + distance
+        simularity_score = simularity_score + number_of_hits_in_right_list
 
-    print("Answer", total_distance)
+    print("Answer Part 1: ", total_distance)
+    print("Answer Part 2: ", simularity_score)
